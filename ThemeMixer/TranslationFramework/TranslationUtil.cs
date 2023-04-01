@@ -9,7 +9,7 @@ namespace ThemeMixer.TranslationFramework
     {
         public static string AssemblyPath => PluginInfo.modPath;
 
-        private static PluginManager.PluginInfo PluginInfo
+        internal static PluginManager.PluginInfo PluginInfo
         {
             get
             {

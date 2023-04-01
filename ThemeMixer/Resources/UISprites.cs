@@ -155,7 +155,7 @@ namespace ThemeMixer.Resources
 
         private static Texture2D GetTextureFromAssemblyManifest(string file)
         {
-            string path = string.Concat(typeof(UISprites).Namespace, ".Files.", file);
+            string path = string.Concat(Assembly.GetExecutingAssembly().GetName().Name, ".Resources.Files.", file);
             Texture2D texture2D = new Texture2D(1, 1, TextureFormat.ARGB32, false);
             using (Stream manifestResourceStream = Assembly.GetExecutingAssembly().GetManifestResourceStream(path))
             {

@@ -1,279 +1,93 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
-  <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7F962063-947D-45B4-AC84-1972403A5938}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ThemeMixer</RootNamespace>
-    <AssemblyName>ThemeMixer</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <Deterministic>false</Deterministic>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Assembly-CSharp-firstpass">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\Assembly-CSharp-firstpass.dll</HintPath>
-    </Reference>
-    <Reference Include="CitiesHarmony.API, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CitiesHarmony.API.2.2.0\lib\net35\CitiesHarmony.API.dll</HintPath>
-    </Reference>
-    <Reference Include="CitiesHarmony.Harmony, Version=2.0.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\CitiesHarmony.Harmony.2.2.2\lib\net35\CitiesHarmony.Harmony.dll</HintPath>
-    </Reference>
-    <Reference Include="ColossalManaged">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ColossalManaged.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="ICities">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\ICities.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Xml" />
-    <Reference Include="UltimateEyecandy">
-      <HintPath>..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\workshop\content\255710\672248733\UltimateEyecandy.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Cities_Skylines\Cities_Data\Managed\UnityEngine.UI.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="ModUtils.cs" />
-    <Compile Include="Helpers\CompatibilityHelper.cs" />
-    <Compile Include="Patching\ColorCorrectionManagerPatch.cs" />
-    <Compile Include="Patching\LoadThemePatch.cs" />
-    <Compile Include="Patching\Patcher.cs" />
-    <Compile Include="Patching\UltimateEyeCandyPatch.cs" />
-    <Compile Include="Patching\WorkshopPatch.cs" />
-    <Compile Include="Resources\ThemeSprites.cs" />
-    <Compile Include="Serialization\Data.cs" />
-    <Compile Include="Serialization\SerializableDataExtension.cs" />
-    <Compile Include="Themes\Atmosphere\AtmosphereColor.cs" />
-    <Compile Include="Themes\Atmosphere\AtmosphereFloat.cs" />
-    <Compile Include="Themes\Atmosphere\MoonTexture.cs" />
-    <Compile Include="Themes\Enums\ColorID.cs" />
-    <Compile Include="Themes\Enums\OffsetID.cs" />
-    <Compile Include="Themes\Enums\ValueID.cs" />
-    <Compile Include="Themes\IPackageIDListProvider.cs" />
-    <Compile Include="Themes\ISelectable.cs" />
-    <Compile Include="Themes\Structures\StructuresTexture.cs" />
-    <Compile Include="Themes\Enums\TextureID.cs" />
-    <Compile Include="Themes\Abstraction\TexturePartBase.cs" />
-    <Compile Include="Themes\Enums\ThemeCategory.cs" />
-    <Compile Include="Themes\Abstraction\ThemePartBase.cs" />
-    <Compile Include="Themes\Enums\ThemePart.cs" />
-    <Compile Include="Themes\Water\WaterColor.cs" />
-    <Compile Include="Themes\Water\WaterTexture.cs" />
-    <Compile Include="Themes\Weather\WeatherValue.cs" />
-    <Compile Include="UI\CategoryPanels\LutsPanel.cs" />
-    <Compile Include="UI\CategoryPanels\MixesPanel.cs" />
-    <Compile Include="UI\CheckboxPanel.cs" />
-    <Compile Include="UI\ButtonPanel.cs" />
-    <Compile Include="UI\Abstraction\ColorPanel\ColorPanel.cs" />
-    <Compile Include="Serialization\SavedSwatch.cs" />
-    <Compile Include="UI\Abstraction\ColorPanel\SavedSwatchPanel.cs" />
-    <Compile Include="UI\Abstraction\ColorPanel\SwatchButton.cs" />
-    <Compile Include="UI\EventArgs.cs" />
-    <Compile Include="UI\CategoryPanels\AtmospherePanel.cs" />
-    <Compile Include="UI\Abstraction\OffsetPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\LateNightZenithPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\NightHorizonPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\WaterDirtyPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\WaterUnderPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\WaterCleanPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\SkyTintPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\EarlyNightZenithPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\MoonOuterCoronaPanel.cs" />
-    <Compile Include="UI\Parts\ColorPanels\MoonInnerCoronaPanel.cs" />
-    <Compile Include="UI\Parts\OffsetPanels\GrassPollutionPanel.cs" />
-    <Compile Include="UI\Parts\OffsetPanels\GrassFertilityPanel.cs" />
-    <Compile Include="UI\Parts\OffsetPanels\GrassFieldPanel.cs" />
-    <Compile Include="UI\Parts\OffsetPanels\GrassForestPanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectStructuresPanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectWeatherPanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectTerrainPanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectAtmospherePanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectWaterPanel.cs" />
-    <Compile Include="UI\Parts\SelectPanels\SelectThemePanel.cs" />
-    <Compile Include="UI\CategoryPanels\StructuresPanel.cs" />
-    <Compile Include="UI\CategoryPanels\TerrainPanel.cs" />
-    <Compile Include="UI\Abstraction\TexturePanel.cs" />
-    <Compile Include="UI\Abstraction\SelectPanel.cs" />
-    <Compile Include="UI\FastList\ListItem.cs" />
-    <Compile Include="UI\FastList\ListRow.cs" />
-    <Compile Include="UI\FastList\UIFastList.cs" />
-    <Compile Include="UI\ButtonBar.cs" />
-    <Compile Include="UI\DragHandle.cs" />
-    <Compile Include="UI\Parts\TexturePanels\BuildingBaseDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\BuildingBaseNormalPanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\BuildingBurntDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\BuildingAbandonedDiffuse.cs" />
-    <Compile Include="UI\Parts\TexturePanels\OilDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\PavementDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\OreDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\CliffSandNormalPanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\SandDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\GravelDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\RuinedDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\CliffDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\LightColorPalettePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\BuildingFloorDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\DownwardRoadDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\GrassDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\WaterNormalPanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\WaterFoamPanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\UpwardRoadDiffusePanel.cs" />
-    <Compile Include="UI\Parts\TexturePanels\MoonTexturePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\LatitudePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\FogProbabilityNightPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\NorthernLightsProbabilityPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\FogProbabilityDayPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\RainProbabilityNightPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\RainProbabilityDayPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MaxTemperatureFogPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MinTemperatureFogPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MaxTemperatureRainPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MinTemperatureRainPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MaxTemperatureNightPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MinTemperatureNightPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MaxTemperatureDayPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\StarsIntensityPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\OuterSpaceIntensityPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MoonSizePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\ExposurePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MiePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\RayleighPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\SunAnisotropyPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\MinTemperatureDayPanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\SunSizePanel.cs" />
-    <Compile Include="UI\Parts\ValuePanels\LongitudePanel.cs" />
-    <Compile Include="UI\Abstraction\ValuePanel.cs" />
-    <Compile Include="UI\CategoryPanels\WaterPanel.cs" />
-    <Compile Include="UI\CategoryPanels\WeatherPanel.cs" />
-    <Compile Include="UI\ThemeMixerUI.cs" />
-    <Compile Include="UI\ToolBar.cs" />
-    <Compile Include="Resources\UISprites.cs" />
-    <Compile Include="Resources\ResourceUtils.cs" />
-    <Compile Include="Themes\Atmosphere\ThemeAtmosphere.cs" />
-    <Compile Include="Themes\IMixable.cs" />
-    <Compile Include="Serialization\SerializationService.cs" />
-    <Compile Include="Themes\Structures\ThemeStructures.cs" />
-    <Compile Include="Themes\Terrain\TerrainDetail.cs" />
-    <Compile Include="Themes\Terrain\ThemeTerrain.cs" />
-    <Compile Include="Themes\ThemeManager.cs" />
-    <Compile Include="Themes\ThemeMix.cs" />
-    <Compile Include="Themes\Terrain\TerrainColorOffset.cs" />
-    <Compile Include="Themes\Terrain\TerrainTexture.cs" />
-    <Compile Include="Themes\Water\ThemeWater.cs" />
-    <Compile Include="Themes\Weather\ThemeWeather.cs" />
-    <Compile Include="UI\UIController.cs" />
-    <Compile Include="UI\Abstraction\PanelBase.cs" />
-    <Compile Include="UI\UIExtensions.cs" />
-    <Compile Include="UI\UIRoot.cs" />
-    <Compile Include="UI\UIToggle.cs" />
-    <Compile Include="UI\UIUtils.cs" />
-    <Compile Include="Locale\TranslationID.cs" />
-    <Compile Include="Mod.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TranslationFramework\Language.cs" />
-    <Compile Include="TranslationFramework\TranslatableAttribute.cs" />
-    <Compile Include="TranslationFramework\Translation.cs" />
-    <Compile Include="TranslationFramework\TranslationUtil.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Locale\chinese.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Locale\russian.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="Resources\Files\LutIcon.png" />
-    <EmbeddedResource Include="Resources\Files\LutIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\LutIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\LutIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\Swatch.png" />
-    <EmbeddedResource Include="Resources\Files\IconBorder.png" />
-    <EmbeddedResource Include="Resources\Files\IconBorderFocused.png" />
-    <EmbeddedResource Include="Resources\Files\IconBorderHovered.png" />
-    <EmbeddedResource Include="Resources\Files\IconBorderPressed.png" />
-    <EmbeddedResource Include="Resources\Files\UndoIcon.png" />
-    <EmbeddedResource Include="Resources\Files\UndoIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\UndoIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\Blacklisted.png" />
-    <EmbeddedResource Include="Resources\Files\Star.png" />
-    <EmbeddedResource Include="Resources\Files\StarOutline.png" />
-    <EmbeddedResource Include="Resources\Files\ThemesIcon.png" />
-    <EmbeddedResource Include="Resources\Files\ThemesIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\ThemesIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\ThemesIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\DragHandle.png" />
-    <EmbeddedResource Include="Resources\Files\UIToggleIcon.png" />
-    <EmbeddedResource Include="Resources\Files\UIToggleIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\UIToggleIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\UIToggleIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\SettingsIcon.png" />
-    <EmbeddedResource Include="Resources\Files\SettingsIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\SettingsIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\SettingsIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\AtmosphereIcon.png" />
-    <EmbeddedResource Include="Resources\Files\AtmosphereIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\AtmosphereIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\AtmosphereIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\StructuresIcon.png" />
-    <EmbeddedResource Include="Resources\Files\StructuresIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\StructuresIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\StructuresIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\TerrainIcon.png" />
-    <EmbeddedResource Include="Resources\Files\TerrainIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\TerrainIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\TerrainIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\WaterIcon.png" />
-    <EmbeddedResource Include="Resources\Files\WaterIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\WaterIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\WaterIconPressed.png" />
-    <EmbeddedResource Include="Resources\Files\WeatherIcon.png" />
-    <EmbeddedResource Include="Resources\Files\WeatherIconFocused.png" />
-    <EmbeddedResource Include="Resources\Files\WeatherIconHovered.png" />
-    <EmbeddedResource Include="Resources\Files\WeatherIconPressed.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Themes\Packages\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <PropertyGroup>
-    <PostBuildEvent>mkdir "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"
-del "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)\$(TargetFileName)"
-xcopy /y "$(TargetPath)" "%25LOCALAPPDATA%25\Colossal Order\Cities_Skylines\Addons\Mods\$(SolutionName)"</PostBuildEvent>
-  </PropertyGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net35</TargetFramework>
+		<Title>ThemeMixer2.5</Title>
+		<AssemblyTitle>$(Title)</AssemblyTitle>
+		<Copyright>Copyright © 2023</Copyright>
+		<Product>$(Title)</Product>
+		<Version>1.0</Version>
+		<ManagedDLLPath>$(MSBuildProgramFiles32)/Steam/steamapps/common/Cities_Skylines/Cities_Data/Managed</ManagedDLLPath>
+		<UEPath>$(MSBuildProgramFiles32)/Steam/steamapps/workshop/content/255710/672248733</UEPath>
+		<AssemblySearchPaths>
+			$(AssemblySearchPaths);
+			$(ManagedDLLPath);
+			$(UEPath)
+		</AssemblySearchPaths>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+	</PropertyGroup>
+	<ItemGroup>
+		<EmbeddedResource Include="Resources\Files\LutIcon.png" />
+		<EmbeddedResource Include="Resources\Files\LutIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\LutIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\LutIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\Swatch.png" />
+		<EmbeddedResource Include="Resources\Files\IconBorder.png" />
+		<EmbeddedResource Include="Resources\Files\IconBorderFocused.png" />
+		<EmbeddedResource Include="Resources\Files\IconBorderHovered.png" />
+		<EmbeddedResource Include="Resources\Files\IconBorderPressed.png" />
+		<EmbeddedResource Include="Resources\Files\UndoIcon.png" />
+		<EmbeddedResource Include="Resources\Files\UndoIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\UndoIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\Blacklisted.png" />
+		<EmbeddedResource Include="Resources\Files\Star.png" />
+		<EmbeddedResource Include="Resources\Files\StarOutline.png" />
+		<EmbeddedResource Include="Resources\Files\ThemesIcon.png" />
+		<EmbeddedResource Include="Resources\Files\ThemesIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\ThemesIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\ThemesIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\DragHandle.png" />
+		<EmbeddedResource Include="Resources\Files\UIToggleIcon.png" />
+		<EmbeddedResource Include="Resources\Files\UIToggleIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\UIToggleIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\UIToggleIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\SettingsIcon.png" />
+		<EmbeddedResource Include="Resources\Files\SettingsIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\SettingsIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\SettingsIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\AtmosphereIcon.png" />
+		<EmbeddedResource Include="Resources\Files\AtmosphereIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\AtmosphereIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\AtmosphereIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\StructuresIcon.png" />
+		<EmbeddedResource Include="Resources\Files\StructuresIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\StructuresIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\StructuresIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\TerrainIcon.png" />
+		<EmbeddedResource Include="Resources\Files\TerrainIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\TerrainIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\TerrainIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\WaterIcon.png" />
+		<EmbeddedResource Include="Resources\Files\WaterIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\WaterIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\WaterIconPressed.png" />
+		<EmbeddedResource Include="Resources\Files\WeatherIcon.png" />
+		<EmbeddedResource Include="Resources\Files\WeatherIconFocused.png" />
+		<EmbeddedResource Include="Resources\Files\WeatherIconHovered.png" />
+		<EmbeddedResource Include="Resources\Files\WeatherIconPressed.png" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="CitiesHarmony.API" Version="2.2.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Assembly-CSharp" />
+		<Reference Include="ColossalManaged" />
+		<Reference Include="ICities" />
+		<Reference Include="UnityEngine" />
+		<Reference Include="UltimateEyecandy" />
+	</ItemGroup>
+	<ItemGroup>
+		<Content Include="Locale\chinese.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Locale\russian.xml">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
+	<Target Name="DeployToModDirectory" AfterTargets="Build">
+		<PropertyGroup>
+			<DeployDir>$(LOCALAPPDATA)/Colossal Order/Cities_Skylines/Addons/Mods/$(SolutionName)/</DeployDir>
+		</PropertyGroup>
+		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
+		<Copy SourceFiles="$(TargetDir)/CitiesHarmony.API.dll" DestinationFolder="$(DeployDir)" />
+	</Target>
 </Project>
