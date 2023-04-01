@@ -76,12 +76,8 @@
 		<Reference Include="UltimateEyecandy" />
 	</ItemGroup>
 	<ItemGroup>
-		<Content Include="Locale\chinese.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
-		<Content Include="Locale\russian.xml">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</Content>
+		<_Locales Include="$(ProjectDir)/Locale/*.xml" />
+		<_Themes Include="$(ProjectDir)/Resources/Themes/*.crp" />
 	</ItemGroup>
 	<Target Name="DeployToModDirectory" AfterTargets="Build">
 		<PropertyGroup>
@@ -89,5 +85,7 @@
 		</PropertyGroup>
 		<Copy SourceFiles="$(TargetPath)" DestinationFolder="$(DeployDir)" />
 		<Copy SourceFiles="$(TargetDir)/CitiesHarmony.API.dll" DestinationFolder="$(DeployDir)" />
+		<Copy SourceFiles="@(_Locales)" DestinationFolder="$(DeployDir)/Locale" />
+		<Copy SourceFiles="@(_Themes)" DestinationFolder="$(DeployDir)" />
 	</Target>
 </Project>
