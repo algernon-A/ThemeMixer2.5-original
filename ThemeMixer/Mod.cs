@@ -1,7 +1,5 @@
-﻿using System;
-using System.Reflection;
-using ColossalFramework.Plugins;
-using Harmony;
+﻿using ColossalFramework.Plugins;
+using CitiesHarmony.API;
 using ICities;
 using JetBrains.Annotations;
 using ThemeMixer.Locale;
@@ -27,8 +25,6 @@ namespace ThemeMixer
 
         public static bool ThemeDecalsEnabled => IsModEnabled(895061550UL, "Theme Decals");
 
-        private static HarmonyInstance Harmony { get; set; }
-
         private static UltimateEyeCandyPatch UltimateEyeCandyPatch { get; set; }
         public static object Instance { get; private set; }
 
@@ -37,7 +33,7 @@ namespace ThemeMixer
         {
             EnsureManagers();
             ManagersOnEnabled();
-            InstallHarmony();
+            HarmonyHelper.DoOnHarmonyReady(() => Patcher.PatchAll());
             Debug.Log("Theme Mixer 2.5 has been initialized.");
         }
 
@@ -45,7 +41,10 @@ namespace ThemeMixer
         public void OnDisabled()
         {
             ReleaseManagers();
-            UnInstallHarmony();
+            if (HarmonyHelper.IsHarmonyInstalled)
+            {
+                Patcher.UnpatchAll();
+            }
         }
 
         public void OnCreated(ILoading loading) { }
@@ -63,7 +62,18 @@ namespace ThemeMixer
             ManagersOnLevelUnloaded();
         }
 
-
+        internal static bool IsModEnabled(ulong publishedFileID, string modName)
+        {
+            foreach (var plugin in PluginManager.instance.GetPluginsInfo())
+            {
+                if (plugin.publishedFileID.AsUInt64 == publishedFileID
+                    || plugin.name == modName)
+                {
+                    return plugin.isEnabled;
+                }
+            }
+            return false;
+        }
 
         private static void EnsureManagers()
         {
@@ -98,51 +108,6 @@ namespace ThemeMixer
         {
             ThemeManager.Instance.OnLevelUnloaded();
             UIController.Instance.OnLevelUnloaded();
-        }
-
-        private static void InstallHarmony()
-        {
-            Harmony = HarmonyInstance.Create("com.nyoko.thememixer2.5");
-            Harmony.PatchAll(Assembly.GetExecutingAssembly());
-            if (IsModEnabled(672248733UL, "UltimateEyeCandy"))
-            {
-                UltimateEyeCandyPatch = new UltimateEyeCandyPatch();
-                UltimateEyeCandyPatch.Patch(Harmony);
-            }
-        }
-
-        private static void UnInstallHarmony()
-        {
-            if (Harmony == null) return;
-            try
-            {
-                UltimateEyeCandyPatch?.Unpatch(Harmony);
-                Harmony.UnpatchAll(HarmonyID);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-            }
-            finally
-            {
-                UltimateEyeCandyPatch = null;
-                Harmony = null;
-            }
-        }
-
-
-
-        private static bool IsModEnabled(ulong publishedFileID, string modName)
-        {
-            foreach (var plugin in PluginManager.instance.GetPluginsInfo())
-            {
-                if (plugin.publishedFileID.AsUInt64 == publishedFileID
-                    || plugin.name == modName)
-                {
-                    return plugin.isEnabled;
-                }
-            }
-            return false;
         }
     }
 }

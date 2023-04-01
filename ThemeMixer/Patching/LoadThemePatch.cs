@@ -4,7 +4,7 @@ using System.Reflection;
 using ColossalFramework;
 using ColossalFramework.Packaging;
 using ColossalFramework.UI;
-using Harmony;
+using HarmonyLib;
 using JetBrains.Annotations;
 
 namespace ThemeMixer.Patching

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Reflection;
-using Harmony;
+using HarmonyLib;
 using UltimateEyecandy.GUI;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -18,7 +18,7 @@ namespace ThemeMixer.Patching
         private static OptionsGraphicsPanel _ogp;
         private static OptionsGraphicsPanel Ogp => _ogp ?? (_ogp = Object.FindObjectOfType<OptionsGraphicsPanel>());
 
-        public void Patch(HarmonyInstance harmonyInstance)
+        public void Patch(Harmony harmonyInstance)
         {
             try
             {
@@ -37,7 +37,7 @@ namespace ThemeMixer.Patching
             }
         }
 
-        public void Unpatch(HarmonyInstance harmonyInstance)
+        public void Unpatch(Harmony harmonyInstance)
         {
             try
             {

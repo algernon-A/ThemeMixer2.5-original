@@ -1,6 +1,6 @@
 ﻿using System.IO;
 using ColossalFramework.PlatformServices;
-using Harmony;
+using HarmonyLib;
 
 namespace ThemeMixer.Patching
 {
